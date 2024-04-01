@@ -1,0 +1,35 @@
+<div class="container my-5">
+
+    <h2 class="mb-5">Mi Formulario</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="row g-3">
+        <div class="col-6">
+            <label for="inputName" class="form-label">First Name</label>
+            <input [class.is-invalid]="nameControl?.touched && nameControl?.invalid" formControlName="name" type="text" class="form-control" aria-label="First name">
+        <small *ngIf="nameControl?.hasError('noHomero')" class="invalid-feedback">No se admiten Homeros</small>
+        </div>
+        <div class="col-6">
+            <label for="inputLastName" class="form-label">Last Name</label>
+            <input formControlName="lastName" type="text" class="form-control" aria-label="Last name">
+        </div>
+        <div class="col-12">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input formControlName="email" type="email" class="form-control"
+                [ngClass]="emailControl?.valid ? 'is-valid' : ''" id="inputEmail4">
+        </div>
+        <div class="col-6">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <input formControlName="pass" type="password" class="form-control"
+                [ngClass]="passControl?.valid ? 'is-valid' : ''"
+                [class.is-invalid]="passControl?.touched && passControl?.invalid" id="inputPassword4">
+            <small *ngIf="passControl?.hasError('required')" class="errorMessage invalid-feedback">Este campo es
+                requerido.</small>
+            <small *ngIf="this.userForm.get('pass')?.errors?.['minlength']">
+                (Debe tener como mínimo 8 caracteres)
+            </small>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+</div>
